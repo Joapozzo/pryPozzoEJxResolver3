@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace pryPozzoEJxResolver
 {
+    //Consultar sobre los bool, como ver el vector cargado
+
     public partial class frmInicio : Form
     {
         public struct structIngresos
@@ -18,13 +20,13 @@ namespace pryPozzoEJxResolver
             public string varOrigen;
             public int varNroRepuesto;
             public string varDescripcion;
-            public decimal varPrecio;
+            public int varPrecio;
         }
-        
-        structIngresos[] vecIngresos = new structIngresos[100];
+
+        structIngresos[] vecIngresos = new structIngresos[10];
         public int varIndice;
-        
-        
+
+
         public frmInicio()
         {
             InitializeComponent();
@@ -35,17 +37,11 @@ namespace pryPozzoEJxResolver
             if (lstMarca.SelectedIndex != -1)
             {
                 lstOrigen.Enabled = true;
-
-                
             }
             else
             {
                 lstOrigen.Enabled = false;
             }
-
-
-
-
         }
 
         private void lstOrigen_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,8 +58,6 @@ namespace pryPozzoEJxResolver
                 }
             }
 
-
-
         }
 
         private void txtDescripcion_TextChanged(object sender, EventArgs e)
@@ -75,7 +69,7 @@ namespace pryPozzoEJxResolver
             else
             {
                 txtPrecio.Enabled = false;
-            }        
+            }
         }
 
         private void txtPrecio_TextChanged(object sender, EventArgs e)
@@ -90,14 +84,9 @@ namespace pryPozzoEJxResolver
             }
         }
 
-        private void frmInicio_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtNroRepuesto_TextChanged(object sender, EventArgs e)
         {
-            
+
             if (txtNroRepuesto.Text != "")
             {
                 txtDescripcion.Enabled = true;
@@ -106,7 +95,7 @@ namespace pryPozzoEJxResolver
             {
                 txtDescripcion.Enabled = false;
             }
-           
+
         }
 
         private void txtNroRepuesto_KeyPress(object sender, KeyPressEventArgs e)
@@ -125,10 +114,78 @@ namespace pryPozzoEJxResolver
             }
         }
 
+
+        private void limpiarControles()
+        {
+            txtNroRepuesto.Clear();
+            txtDescripcion.Clear();
+            txtPrecio.Clear();
+        }
+
+        private bool validarDatos()
+        {
+            bool resultado = false;
+            if (lstMarca.SelectedIndex != -1 && lstOrigen.SelectedIndex != -1 && txtNroRepuesto.Text != "" && txtDescripcion.Text != "" && txtPrecio.Text != "")
+            {
+                if (txtNroRepuesto.MaxLength < 6)
+                {
+                    MessageBox.Show("Ingrese bien el Numero de Repuesto");
+                    resultado = false;
+                }
+                resultado = true;
+            }
+            else
+            {
+                MessageBox.Show("Datos mal ingresados");
+            }
+            return resultado;
+        }
+
+        private bool RepuestoRepetido(int numero)
+        {
+            bool repetido = false;
+            int varIndice1 = 1;
+            while (varIndice <= 100)
+            {
+                if (vecIngresos[varIndice].varNroRepuesto == vecIngresos[varIndice].varNroRepuesto)
+                {
+                    MessageBox.Show("Ya se ha registrado un Repuesto con ese numero");
+                    repetido = true;
+
+                }
+                varIndice++;
+                varIndice1++;
+            }
+            return repetido;
+        }
+
+
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            vecIngresos[varIndice].varMarca = txtDatosRepuestos.Text;
+            if (validarDatos())
+            vecIngresos[varIndice].varMarca = txtDatosRepuestos.Text + "/";
+            vecIngresos[varIndice].varOrigen = txtDatosRepuestos.Text + "/";
+            vecIngresos[varIndice].varNroRepuesto = int.Parse(txtNroRepuesto.Text);
+            vecIngresos[varIndice].varDescripcion = txtDatosRepuestos.Text + "/";
+            //vecIngresos[varIndice].varPrecio = int.Parse(txtDatosRepuestos.Text);
+            varIndice++;
+            if (varIndice == 100)
+            {
+                MessageBox.Show("Se ha completado el Numero de Registros");
+                btnRegistrar.Enabled = false;
+            }
+            limpiarControles();
+        }
 
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            varIndice = 0;
+            while (varIndice <= 100)
+            {
+                vecIngresos[varIndice] 
+                varIndice++;
+
+            }
         }
     }
 }
