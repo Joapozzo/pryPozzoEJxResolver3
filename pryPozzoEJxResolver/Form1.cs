@@ -12,6 +12,19 @@ namespace pryPozzoEJxResolver
 {
     public partial class frmInicio : Form
     {
+        public struct structIngresos
+        {
+            public string varMarca;
+            public string varOrigen;
+            public int varNroRepuesto;
+            public string varDescripcion;
+            public decimal varPrecio;
+        }
+        
+        structIngresos[] vecIngresos = new structIngresos[100];
+        public int varIndice;
+        
+        
         public frmInicio()
         {
             InitializeComponent();
@@ -22,6 +35,8 @@ namespace pryPozzoEJxResolver
             if (lstMarca.SelectedIndex != -1)
             {
                 lstOrigen.Enabled = true;
+
+                
             }
             else
             {
@@ -82,6 +97,7 @@ namespace pryPozzoEJxResolver
 
         private void txtNroRepuesto_TextChanged(object sender, EventArgs e)
         {
+            
             if (txtNroRepuesto.Text != "")
             {
                 txtDescripcion.Enabled = true;
@@ -107,6 +123,12 @@ namespace pryPozzoEJxResolver
             {
                 e.Handled = true; // borrar la tecla ingresada
             }
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            vecIngresos[varIndice].varMarca = txtDatosRepuestos.Text;
+
         }
     }
 }
