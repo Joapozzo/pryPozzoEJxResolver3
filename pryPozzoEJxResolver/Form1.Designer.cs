@@ -46,10 +46,10 @@
             this.mrcConsulta = new System.Windows.Forms.GroupBox();
             this.btnConsultar = new System.Windows.Forms.Button();
             this.lblDatosRepuestos = new System.Windows.Forms.Label();
-            this.txtDatosRepuestos = new System.Windows.Forms.TextBox();
             this.optImportado = new System.Windows.Forms.RadioButton();
             this.optNacional = new System.Windows.Forms.RadioButton();
             this.lblOrigenConsulta = new System.Windows.Forms.Label();
+            this.lisDatos = new System.Windows.Forms.ListBox();
             this.mrcRepuestroRegistro.SuspendLayout();
             this.mrcConsulta.SuspendLayout();
             this.SuspendLayout();
@@ -239,9 +239,9 @@
             // 
             // mrcConsulta
             // 
+            this.mrcConsulta.Controls.Add(this.lisDatos);
             this.mrcConsulta.Controls.Add(this.btnConsultar);
             this.mrcConsulta.Controls.Add(this.lblDatosRepuestos);
-            this.mrcConsulta.Controls.Add(this.txtDatosRepuestos);
             this.mrcConsulta.Controls.Add(this.optImportado);
             this.mrcConsulta.Controls.Add(this.optNacional);
             this.mrcConsulta.Controls.Add(this.lblOrigenConsulta);
@@ -251,14 +251,15 @@
             this.mrcConsulta.Margin = new System.Windows.Forms.Padding(4);
             this.mrcConsulta.Name = "mrcConsulta";
             this.mrcConsulta.Padding = new System.Windows.Forms.Padding(4);
-            this.mrcConsulta.Size = new System.Drawing.Size(308, 391);
+            this.mrcConsulta.Size = new System.Drawing.Size(390, 438);
             this.mrcConsulta.TabIndex = 12;
             this.mrcConsulta.TabStop = false;
             this.mrcConsulta.Text = "Consulta";
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(188, 327);
+            this.btnConsultar.Enabled = false;
+            this.btnConsultar.Location = new System.Drawing.Point(282, 393);
             this.btnConsultar.Margin = new System.Windows.Forms.Padding(4);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(100, 28);
@@ -276,16 +277,6 @@
             this.lblDatosRepuestos.Size = new System.Drawing.Size(112, 16);
             this.lblDatosRepuestos.TabIndex = 16;
             this.lblDatosRepuestos.Text = "Datos Repuestos";
-            // 
-            // txtDatosRepuestos
-            // 
-            this.txtDatosRepuestos.Enabled = false;
-            this.txtDatosRepuestos.Location = new System.Drawing.Point(128, 171);
-            this.txtDatosRepuestos.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDatosRepuestos.Multiline = true;
-            this.txtDatosRepuestos.Name = "txtDatosRepuestos";
-            this.txtDatosRepuestos.Size = new System.Drawing.Size(160, 132);
-            this.txtDatosRepuestos.TabIndex = 15;
             // 
             // optImportado
             // 
@@ -320,6 +311,15 @@
             this.lblOrigenConsulta.Size = new System.Drawing.Size(47, 16);
             this.lblOrigenConsulta.TabIndex = 6;
             this.lblOrigenConsulta.Text = "Origen";
+            // 
+            // lisDatos
+            // 
+            this.lisDatos.FormattingEnabled = true;
+            this.lisDatos.ItemHeight = 16;
+            this.lisDatos.Location = new System.Drawing.Point(127, 171);
+            this.lisDatos.Name = "lisDatos";
+            this.lisDatos.Size = new System.Drawing.Size(256, 180);
+            this.lisDatos.TabIndex = 13;
             // 
             // frmInicio
             // 
@@ -357,12 +357,12 @@
         private System.Windows.Forms.Label lblMarcaConsulta;
         private System.Windows.Forms.ComboBox lstMarcaConsulta;
         private System.Windows.Forms.GroupBox mrcConsulta;
-        private System.Windows.Forms.TextBox txtDatosRepuestos;
         private System.Windows.Forms.RadioButton optImportado;
         private System.Windows.Forms.RadioButton optNacional;
         private System.Windows.Forms.Label lblOrigenConsulta;
         private System.Windows.Forms.Label lblDatosRepuestos;
         private System.Windows.Forms.Button btnConsultar;
+        private System.Windows.Forms.ListBox lisDatos;
     }
 }
 
