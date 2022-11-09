@@ -23,9 +23,10 @@ namespace pryPozzoEJxResolver
             public float varPrecio;
         }
 
-        structIngresos[] vecIngresos = new structIngresos[3];
+        structIngresos[] vecIngresos = new structIngresos[100];
         public int varIndice;
-      
+        public int varIndice2;
+
         public frmInicio()
         {
             InitializeComponent();
@@ -116,16 +117,14 @@ namespace pryPozzoEJxResolver
 
         private void limpiarControles()
         {
-            lstOrigen.Items.Clear();
-            lstMarca.Items.Clear(); 
-            txtNroRepuesto.Clear();
-            txtDescripcion.Clear();
-            txtPrecio.Clear();
+            lstOrigen.SelectedIndex = -1;
+            lstMarca.SelectedIndex = -1;
+            txtNroRepuesto.Text = "";
+            txtDescripcion.Text = "";
+            txtPrecio.Text = "";
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            int varIndice = 0;
-            int varIndice2 = 0;
             if (btnRegistrar.Enabled)
             {
                 btnConsultar.Enabled = true;
@@ -134,47 +133,63 @@ namespace pryPozzoEJxResolver
             {
                 btnConsultar.Enabled = false;
             }
-
-            while (varIndice <= vecIngresos.Length)      
-            {
-                if (vecIngresos[varIndice].varNroRepuesto == vecIngresos[varIndice + 1].varNroRepuesto)
-                {
-                    MessageBox.Show("CACA");
-                }
-                vecIngresos[varIndice].varMarca = lstMarca.Text;
-                vecIngresos[varIndice].varOrigen = lstOrigen.Text;
-                vecIngresos[varIndice].varNroRepuesto = int.Parse(txtNroRepuesto.Text);
-                vecIngresos[varIndice].varDescripcion = txtDescripcion.Text;
-                vecIngresos[varIndice].varPrecio = int.Parse(txtPrecio.Text);
-                varIndice++;
-                varIndice2++;
-            }
-            if (varIndice == 10)
-            {
-                btnRegistrar.Enabled = false;
-            }
-
-            while (varIndice2 <= 4)
-            {
-
-            }
-                
-                
-            
-
-
+            vecIngresos[varIndice].varMarca = lstMarca.Text;
+            vecIngresos[varIndice].varOrigen = lstOrigen.Text;
+            vecIngresos[varIndice].varNroRepuesto = int.Parse(txtNroRepuesto.Text);
+            vecIngresos[varIndice].varDescripcion = txtDescripcion.Text;
+            vecIngresos[varIndice].varPrecio = int.Parse(txtPrecio.Text);
+            varIndice++;
             limpiarControles();
+
+            varIndice = 0;
+            bool existeRepuesto = false;
+            while (varIndice < vecIngresos.Length)
+            {
+                if (vecIngresos[varIndice].varNroRepuesto == int.Parse(txtNroRepuesto.Text))
+                {
+                    existeRepuesto = true;
+                    MessageBox.Show("El Numero de repuesto ingresado ya es existente");
+                    btnRegistrar.Enabled = false;
+                }
+                else
+                {
+                    existeRepuesto = false;
+
+                }
+                varIndice++;
+            }
+
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
             lisDatos.Items.Clear();
-            varIndice = 0;
-            while (varIndice < vecIngresos.Length)
+            varIndice2 = 0;
+            while (varIndice2 < vecIngresos.Length)
             {
-                lisDatos.Items.Add(vecIngresos[varIndice]);
-                varIndice++;
+                if (vecIngresos[varIndice2].varMarca == lstMarcaConsulta.Text)
+                {
+
+                    if (optNacional.Checked == true && vecIngresos[varIndice2].varOrigen == "Nacional")
+                    {
+                        lisDatos.Items.Add("Nro Repuesto: " + vecIngresos[varIndice2].varNroRepuesto);
+                        lisDatos.Items.Add("Descripcion: " + vecIngresos[varIndice2].varDescripcion);
+                        lisDatos.Items.Add("Precio: $" + vecIngresos[varIndice2].varPrecio);
+                    }
+                    else
+                    {
+                        lisDatos.Items.Add("Nro Repuesto: " + vecIngresos[varIndice2].varNroRepuesto);
+                        lisDatos.Items.Add("Descripcion: " + vecIngresos[varIndice2].varDescripcion);
+                        lisDatos.Items.Add("Precio: $" + vecIngresos[varIndice2].varPrecio);
+                    }
+                }
+                varIndice2++;
             }
+        }
+
+        private void frmInicio_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
