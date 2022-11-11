@@ -125,41 +125,41 @@ namespace pryPozzoEJxResolver
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            if (btnRegistrar.Enabled)
-            {
-                btnConsultar.Enabled = true;
-            }
-            else
-            {
-                btnConsultar.Enabled = false;
-            }
-            vecIngresos[varIndice].varMarca = lstMarca.Text;
-            vecIngresos[varIndice].varOrigen = lstOrigen.Text;
-            vecIngresos[varIndice].varNroRepuesto = int.Parse(txtNroRepuesto.Text);
-            vecIngresos[varIndice].varDescripcion = txtDescripcion.Text;
-            vecIngresos[varIndice].varPrecio = int.Parse(txtPrecio.Text);
-            varIndice++;
-            limpiarControles();
-
-            varIndice = 0;
+            varIndice2 = 0;
             bool existeRepuesto = false;
-            while (varIndice < vecIngresos.Length)
+            while (varIndice2 < vecIngresos.Length)
             {
-                if (vecIngresos[varIndice].varNroRepuesto == int.Parse(txtNroRepuesto.Text))
+                if (vecIngresos[varIndice2].varNroRepuesto == int.Parse(txtNroRepuesto.Text))
                 {
                     existeRepuesto = true;
                     MessageBox.Show("El Numero de repuesto ingresado ya es existente");
                     btnRegistrar.Enabled = false;
                 }
+                varIndice2++;
+
+            }
+            if (existeRepuesto == false)
+            {
+                if (btnRegistrar.Enabled)
+                {
+                    btnConsultar.Enabled = true;
+                }
                 else
                 {
-                    existeRepuesto = false;
-
+                    btnConsultar.Enabled = false;
                 }
+                vecIngresos[varIndice].varMarca = lstMarca.Text;
+                vecIngresos[varIndice].varOrigen = lstOrigen.Text;
+                vecIngresos[varIndice].varNroRepuesto = int.Parse(txtNroRepuesto.Text);
+                vecIngresos[varIndice].varDescripcion = txtDescripcion.Text;
+                vecIngresos[varIndice].varPrecio = int.Parse(txtPrecio.Text);
                 varIndice++;
+                limpiarControles();
             }
-
+            
         }
+        
+
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
@@ -178,9 +178,13 @@ namespace pryPozzoEJxResolver
                     }
                     else
                     {
-                        lisDatos.Items.Add("Nro Repuesto: " + vecIngresos[varIndice2].varNroRepuesto);
-                        lisDatos.Items.Add("Descripcion: " + vecIngresos[varIndice2].varDescripcion);
-                        lisDatos.Items.Add("Precio: $" + vecIngresos[varIndice2].varPrecio);
+                        if (optImportado.Checked == true && vecIngresos[varIndice2].varOrigen == "Importado")
+                        {
+                            lisDatos.Items.Add("Nro Repuesto: " + vecIngresos[varIndice2].varNroRepuesto);
+                            lisDatos.Items.Add("Descripcion: " + vecIngresos[varIndice2].varDescripcion);
+                            lisDatos.Items.Add("Precio: $" + vecIngresos[varIndice2].varPrecio);
+                        }
+                       
                     }
                 }
                 varIndice2++;
